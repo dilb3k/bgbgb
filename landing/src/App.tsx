@@ -161,7 +161,7 @@ function App() {
 
       <header className="nav" id="nav">
         <div className="nav-inner">
-          <a href="#top" className="brand" style={{ gap: 8 }}>
+          <a href="/top" className="brand" style={{ gap: 8 }}>
             <span style={{ display: 'flex', alignItems: 'center', height: 55, overflow: 'hidden' }}>
               <img src="/Hisvex.png" alt="Hisvex" style={{ height: 110, width: 'auto', display: 'block', objectFit: 'cover', objectPosition: 'center' }} />
             </span>
@@ -352,7 +352,7 @@ function App() {
         <div className="wrap">
           <div className="foot-grid">
             <div className="foot-brand">
-              <a href="#top" className="brand" style={{ gap: 8 }}>
+              <a href="/top" className="brand" style={{ gap: 8 }}>
                 <span style={{ display: 'flex', alignItems: 'center', height: 55, overflow: 'hidden' }}>
                   <img src="/Hisvex.png" alt="Hisvex" style={{ height: 110, width: 'auto', display: 'block', objectFit: 'cover', objectPosition: 'center' }} />
                 </span>
@@ -362,7 +362,7 @@ function App() {
               <a href="https://t.me/dilbek7011" target="_blank" className="tg-btn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22 3 2 10.5l5.5 2L17 6l-7 8.5V20l3-3.5 4 3z" /></svg>@dilbek7011</a>
             </div>
             <div className="foot-col"><h5>Mahsulot</h5><a href="imkoniyatlar.html">Imkoniyatlar</a><a href="ekranlar.html">Ekranlar</a><a href="narxlar.html">Narxlar</a><a href="privacy.html">Privacy</a></div>
-            <div className="foot-col"><h5>Kompaniya</h5><a href="faq.html">Savol-javob</a><a href="https://t.me/dilbek7011" target="_blank">Bog'lanish</a><a href="#top">Boshiga</a></div>
+            <div className="foot-col"><h5>Kompaniya</h5><a href="faq.html">Savol-javob</a><a href="https://t.me/dilbek7011" target="_blank">Bog'lanish</a><a href="/top">Boshiga</a></div>
             <div className="foot-col"><h5>Huquqiy</h5><a href="terms.html">Foydalanish shartlari</a><a href="privacy.html">Maxfiylik siyosati</a></div>
           </div>
           <div className="foot-bot">
