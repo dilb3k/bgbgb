@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 
 const I = {
   s: '<svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="m20 20-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
@@ -88,6 +89,7 @@ function AppPhone({ idx: pi }: { idx: number }) {
 }
 
 function App() {
+  const { pathname } = useLocation()
   useEffect(() => {
     const nav = document.getElementById('nav')
     const scrollHandler = () => nav?.classList.toggle('scrolled', scrollY > 20)
@@ -147,12 +149,31 @@ function App() {
 
     document.getElementById('year')!.textContent = String(new Date().getFullYear())
 
+    const sectionId = pathname === '/' ? null : pathname.replace('/', '')
+    if (sectionId) {
+      const el = document.getElementById(sectionId)
+      if (el) {
+        const start = scrollY
+        const target = el.getBoundingClientRect().top + start - 20
+        const dist = target - start
+        const dur = 900
+        const st = performance.now()
+        const tick = (n: number) => {
+          const p = Math.min((n - st) / dur, 1)
+          const ease = 1 - Math.pow(1 - p, 3)
+          scrollTo(0, start + dist * ease)
+          if (p < 1) requestAnimationFrame(tick)
+        }
+        requestAnimationFrame(tick)
+      }
+    }
+
     return () => {
       removeEventListener('scroll', scrollHandler)
       io.disconnect()
       cio.disconnect()
     }
-  }, [])
+  }, [pathname])
 
   return (
     <>
@@ -168,10 +189,10 @@ function App() {
             <span><span style={{ color: '#8B5CF6', fontSize: 28, fontWeight: 700 }}>His</span><span style={{ color: '#FFF', fontSize: 28, fontWeight: 700 }}>vex</span></span>
           </a>
           <nav className="nav-links">
-            <a href="imkoniyatlar.html">Imkoniyatlar</a><a href="ekranlar.html">Ekranlar</a><a href="narxlar.html">Narxlar</a><a href="privacy.html">Privacy</a><a href="faq.html">Savollar</a>
+            <a href="/imkoniyatlar">Imkoniyatlar</a><a href="/ekranlar">Ekranlar</a><a href="/narxlar">Narxlar</a><a href="/privacy">Privacy</a><a href="/faq">Savollar</a>
           </nav>
           <div className="nav-cta">
-            <a href="privacy.html" className="btn btn-ghost">Privacy</a>
+            <a href="/privacy" className="btn btn-ghost">Privacy</a>
             <a href="https://t.me/dilbek7011" target="_blank" className="btn btn-gold">Boshlash <span className="arr">→</span></a>
           </div>
           <div className="burger" id="burger"><span></span><span></span><span></span></div>
@@ -188,7 +209,7 @@ function App() {
             <p className="lead reveal d2">Hisvex — mahsulot, ombor, savdo, qarzdor va statistikani <b style={{ color: 'var(--text)' }}>bitta ilovada</b> boshqaradi. Internetsiz ham ishlaydi, har bir so'm aniq hisoblanadi — hech qanday anglashilmovchiliksiz.</p>
             <div className="hero-cta reveal d3">
               <a href="https://t.me/dilbek7011" target="_blank" className="btn btn-gold">Hoziroq boshlash <span className="arr">→</span></a>
-              <a href="ekranlar.html" className="btn btn-ghost">Ilovani ko'rish</a>
+              <a href="/ekranlar" className="btn btn-ghost">Ilovani ko'rish</a>
             </div>
             <div className="hero-stats reveal d4">
               <div className="hstat"><div className="n" data-count="1200" data-suffix="+">0</div><div className="l">Savdo nuqtasi</div></div>
@@ -342,7 +363,7 @@ function App() {
             <p className="lead">Hisvex bilan har bir so'mni nazoratga oling. Bugun o'rnating — ertaga farqini ko'ring.</p>
             <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
               <a href="https://t.me/dilbek7011" target="_blank" className="btn btn-gold">Hoziroq boshlash <span className="arr">→</span></a>
-              <a href="imkoniyatlar.html" className="btn btn-ghost">Imkoniyatlarni ko'rish</a>
+              <a href="/imkoniyatlar" className="btn btn-ghost">Imkoniyatlarni ko'rish</a>
             </div>
           </div>
         </div>
@@ -361,9 +382,9 @@ function App() {
               <p>Bar, kafe va do'konlar uchun premium hisob-kitob ilovasi. Oddiy, tez va ishonchli.</p>
               <a href="https://t.me/dilbek7011" target="_blank" className="tg-btn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M22 3 2 10.5l5.5 2L17 6l-7 8.5V20l3-3.5 4 3z" /></svg>@dilbek7011</a>
             </div>
-            <div className="foot-col"><h5>Mahsulot</h5><a href="imkoniyatlar.html">Imkoniyatlar</a><a href="ekranlar.html">Ekranlar</a><a href="narxlar.html">Narxlar</a><a href="privacy.html">Privacy</a></div>
-            <div className="foot-col"><h5>Kompaniya</h5><a href="faq.html">Savol-javob</a><a href="https://t.me/dilbek7011" target="_blank">Bog'lanish</a><a href="/top">Boshiga</a></div>
-            <div className="foot-col"><h5>Huquqiy</h5><a href="terms.html">Foydalanish shartlari</a><a href="privacy.html">Maxfiylik siyosati</a></div>
+            <div className="foot-col"><h5>Mahsulot</h5><a href="/imkoniyatlar">Imkoniyatlar</a><a href="/ekranlar">Ekranlar</a><a href="/narxlar">Narxlar</a><a href="/privacy">Privacy</a></div>
+            <div className="foot-col"><h5>Kompaniya</h5><a href="/faq">Savol-javob</a><a href="https://t.me/dilbek7011" target="_blank">Bog'lanish</a><a href="/top">Boshiga</a></div>
+            <div className="foot-col"><h5>Huquqiy</h5><a href="/terms">Foydalanish shartlari</a><a href="/privacy">Maxfiylik siyosati</a></div>
           </div>
           <div className="foot-bot">
             <span>© <span id="year"></span> Hisvex. Barcha huquqlar himoyalangan.</span>
